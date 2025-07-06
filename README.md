@@ -61,7 +61,7 @@ A full-stack MERN web application that connects users, blood donors, hospitals, 
 
 ---
 
-## 📂 Folder Structure (Optional)
+## Folder Structure
 
 ```bash
 SafeBlood/
@@ -69,6 +69,7 @@ SafeBlood/
 ├── backend/        # Express backend
 ├── screenshots/    # App screenshots
 └── README.md
+```
 
 ---
 
@@ -79,6 +80,7 @@ SafeBlood/
 ```bash
 git clone https://github.com/sahaj1136/SafeBlood-MERN.git
 cd SafeBlood
+```
 
 ### 2. Install Dependencies
 
@@ -87,12 +89,14 @@ cd SafeBlood
 ```bash
 cd client
 npm install
+```
 
 ## Backend (Node.js + express)
 
 ```bash
 cd ../backend
 npm install
+```
 
 ### 3. Setup Environment Variables
 
@@ -102,6 +106,7 @@ Create a .env file in the backend/ directory and add the following:
 PORT=5000
 MONGO_URI=your_mongo_connection_string
 JWT_SECRET=your_jwt_secret
+```
 
 ### 4. Run the Application
 
@@ -110,14 +115,18 @@ JWT_SECRET=your_jwt_secret
 ```bash
 cd backend
 npm run dev
+```
 
 ##Start Frontend Dev Server
 
 ```bash
 cd ../client
 npm start
+```
 
 ### 5. Access the Application
 
+```bash
 Frontend: http://localhost:3000
 Backend: http://localhost:5000
+```
