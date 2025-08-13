@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
     state: { type: String, required: true },
     district: { type: String, required: true },
     address: { type: String },
+    rewardPoints: { type: Number, default: 0 },
 });
 
 const User = mongoose.model('Users', userSchema);

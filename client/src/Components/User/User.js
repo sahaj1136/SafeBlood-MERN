@@ -1,4 +1,3 @@
-import React from 'react'
 import UserNav from './UserNav'
 import { useParams } from "react-router-dom";
 import EditProfile from './EditProfile'

@@ -8,14 +8,19 @@ const Status = (props) => {
         <div >
             <select name="status" id="status" onChange={async (k) => {
                 if (k.target.value === "Donated") {
-                    await axios.put(`/bank/updateStock`, { bloodGroup: props.bloodGroup, units: props.units })
+                    await axios.put(`/bank/updateStock`, { bloodGroup: props.bloodGroup, units: props.units, userId: props.userId })
                         .then(async (response) => {
                             alert("Stock Updated");
+                            
                             await axios.put(`/bank/${props.handle}`, { id: props.id, status: k.target.value })
                                 .then(async (response) => {
                                     setStatus(k.target.value);
                                     props.setId(props.i);
                                     props.setStatus(k.target.value);
+                                    await axios.put(`/user/reward`, { userId: props.id, points: 10 })
+                                        .catch((e) => {
+                                            console.log(`Reward update failed ${e.response.data.message}`);
+                                        });
                                 }, (error) => {
                                     alert("Something went wrong");
                                 });

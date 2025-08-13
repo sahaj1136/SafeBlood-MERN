@@ -19,6 +19,7 @@ const EditProfile = () => {
     const [blood, setBlood] = useState(0);
     const [edit, setEdit] = useState(true);
     const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+    const [rewardPoints, setRewardPoints] = useState(0);
     useEffect(() => {
         setName(user.name);
         setAge(user.age);
@@ -34,6 +35,7 @@ const EditProfile = () => {
         setPassword("Lorem ipsum dolor sit amet consectetur adipisicing elit.");
         setAddress(user.address);
         setBlood(bloodGroups.indexOf(user.bloodGroup));
+        setRewardPoints(user.rewardPoints || 0);
     }, []);
 
     const update = async (e) => {
@@ -120,18 +122,15 @@ const EditProfile = () => {
                                     onChange={(e) => setPhone(e.target.value)}
                                 />
                             </td>
-                            <td className="absolute"><button
-                                type="button"
-                                onClick={() => { setEdit(!edit); }}
-                                className="w-44 mt-8 px-7 py-2 bg-blood text-white-900 hover:bg-gray-darkest rounded-full text-lg font-bold align-bottom"
-                            >
-                                {edit ? "Edit" : "Cancel"}
-                            </button><br /><button
-                                type="submit"
-                                className={`w-44 mt-8 px-7 py-2 bg-blood text-white-900 hover:bg-gray-darkest rounded-full text-lg font-bold align-bottom ${edit && "hidden"}`}
-                            >
-                                    Save
-                                </button></td>
+                            <tr>
+                                <td colSpan={2}>
+                                    <label className="font-semibold leading-8">Reward Points:</label>
+                                    <p className="p-3 text-md border border-silver rounded bg-gray-100">
+                                        {rewardPoints}
+                                    </p>
+                                </td>
+                            </tr>
+
                         </tr>
                         <tr>
                         </tr>
@@ -153,7 +152,20 @@ const EditProfile = () => {
                                 <label className="font-semibold  leading-8">Email:</label>
                                 <input className="w-full p-3 text-md border border-silver rounded" type="email" placeholder="Enter your email" disabled={edit} value={mail} onChange={(e) => setMail(e.target.value)}
                                 />
-                            </td> </tr>
+                            </td> 
+                            <td className="absolute"><button
+                                type="button"
+                                onClick={() => { setEdit(!edit); }}
+                                className="w-44 mt-8 px-7 py-2 bg-blood text-white-900 hover:bg-gray-darkest rounded-full text-lg font-bold align-bottom"
+                            >
+                                {edit ? "Edit" : "Cancel"}
+                            </button><br /><button
+                                type="submit"
+                                className={`w-44 mt-8 px-7 py-2 bg-blood text-white-900 hover:bg-gray-darkest rounded-full text-lg font-bold align-bottom ${edit && "hidden"}`}
+                            >
+                                    Save
+                                </button></td>
+                            </tr>
                         <tr>
                             <td>
                                 <label for="state" className="font-semibold  leading-8">State:<font color="red">*</font></label>

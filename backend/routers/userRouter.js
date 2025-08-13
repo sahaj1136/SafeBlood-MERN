@@ -84,4 +84,31 @@ router.put("/", auth, async (req, res) => {
     }
 });
 
+router.get("/rewards", auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user, "name rewardPoints");
+        res.json(user);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send();
+    }
+});
+
+router.put('/reward', async (req, res) => {
+    try {
+        const { userId, points } = req.body;
+        const donations = await Donations.findById(userId);
+        const user = await User.findById(donations.userId);
+        if (!user) return res.status(404).json({ message: `User not found ${donations.userId}` });
+
+        user.rewardPoints = user.rewardPoints + points;
+        await user.save();
+
+        res.json({ message: "Reward updated", rewardPoints: user.rewardPoints });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+
 module.exports = router;

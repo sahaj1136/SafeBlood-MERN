@@ -25,17 +25,20 @@ router.get("/allBanks/:state/:district", async (req, res) => {
 
 router.put("/updateStock", auth, async (req, res) => {
     try {
-        const prevStock = await BloodBank.findOne({ _id: req.user }, { stock: 1 });
+        const bloodBank = await BloodBank.findOne({ _id: req.user }, { stock: 1 });
+        if (!bloodBank) return res.status(404).send({ message: "Blood bank not found" });
+        const newStock = bloodBank.stock[req.body.bloodGroup] + req.body.units;
         await BloodBank.updateOne(
             { _id: req.user },
-            { $set: { ["stock." + req.body.bloodGroup]: prevStock.stock[req.body.bloodGroup] + req.body.units } }
-        )
+            { $set: { [`stock.${req.body.bloodGroup}`]: newStock } }
+        );
         res.status(200).send();
     } catch (err) {
         console.error(err);
         res.status(500).send();
     }
 });
+
 
 router.put("/deleteStock", auth, async (req, res) => {
     try {
